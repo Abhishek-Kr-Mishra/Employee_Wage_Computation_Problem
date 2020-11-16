@@ -10,6 +10,7 @@ MAX_HOURS_IN_MONTH=1000
 totalWorkingDays=0
 totalWorkHours=0
 
+declare -A empWagesDictionary
 
 function CalculateDailyWage()
 {
@@ -43,14 +44,19 @@ function GetTotalWorkHours()
 		totalWorkHours=$(( $totalWorkHours+$workHours ))
 
 		empDailyWage[$totalWorkingDays]="$(CalculateDailyWage $workHours)"
+
+		empWagesDictionary[$totalWorkingDays]="$(CalculateDailyWage $workHours)"
 	done
 
-	echo -e "Printing Days from the Daily Wage array"
-	echo ${!empDailyWage[@]}
 	echo "Printing the daily wages from array"
 	echo ${empDailyWage[@]}
 
 	echo "*********************************************"
 
+	echo "Printing Days and daily wages together with dictionary"
+	echo ${!empWagesDictionary[@]}
+	echo ${empWagesDictionary[@]}
+
+	echo "*********************************************"
 	totalSalary=$(( $totalWorkHours*$EMP_RATE_PER_HOUR ))
 	echo "Total Salary is $totalSalary"

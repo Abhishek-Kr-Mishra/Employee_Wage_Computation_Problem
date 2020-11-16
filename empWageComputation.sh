@@ -4,7 +4,9 @@
 
 IS_FULL_TIME=1
 IS_PART_TIME=2
-salary=0
+perDaySalary=0
+monthSalary=0
+WORK_DAY_IN_A_MONTH=20
 EMP_RATE_PER_HOUR=20
 
 	attendanceValue=$(( RANDOM%3 ))
@@ -20,5 +22,8 @@ EMP_RATE_PER_HOUR=20
 	esac
 
 	echo "Work Hours : $workHour"
-	salary=$(( $EMP_RATE_PER_HOUR*$workHour ))
-	echo "Salary =  $salary"
+	perDaySalary=$(( $EMP_RATE_PER_HOUR*$workHour ))
+	monthSalary=$(( $perDaySalary*$EMP_RATE_PER_HOUR ))
+	echo "Salary =  $perDaySalary"
+	echo "Salary of a Month = $monthSalary"
+

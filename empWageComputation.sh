@@ -8,18 +8,17 @@ salary=0
 EMP_RATE_PER_HOUR=20
 
 	attendanceValue=$(( RANDOM%3 ))
-	echo "$attendanceValue"
-	if (( $attendanceValue==$IS_FULL_TIME ))
-	then
-		echo "Employee is Full Time "
-		workHour=8
-	elif (( $attendanceValue==$IS_PART_TIME ))
-	then
-		echo "Employee is Part Time"
-		workHour=4
-	else
-		workHour=0
-	fi
+	echo "Random Number: $attendanceValue"
+	case $attendanceValue in
+		1) echo "Employee is Full Time"
+			 workHour=8
+			     ;;
+		2) echo "Employee is Part Time"
+			 workHour=4
+			     ;;
+		*) workHour=0
+	esac
 
+	echo "Work Hours : $workHour"
 	salary=$(( $EMP_RATE_PER_HOUR*$workHour ))
 	echo "Salary =  $salary"

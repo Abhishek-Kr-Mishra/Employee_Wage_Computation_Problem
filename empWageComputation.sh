@@ -10,6 +10,14 @@ MAX_HOURS_IN_MONTH=1000
 totalWorkingDays=0
 totalWorkHours=0
 
+
+function CalculateDailyWage()
+{
+	workHour=$1
+	daySalary=$(( $workHour*$EMP_RATE_PER_HOUR ))
+	echo $daySalary
+}
+
 function GetTotalWorkHours()
 {
                 case $1 in
@@ -22,7 +30,7 @@ function GetTotalWorkHours()
                         *) workHour=0
                 esac
 
-                     echo "$workHour"
+                     echo $workHour
 
 }
 
@@ -33,7 +41,16 @@ function GetTotalWorkHours()
 		workHours="$( GetTotalWorkHours $(( RANDOM%3 )) )"
 		echo "$workHours"
 		totalWorkHours=$(( $totalWorkHours+$workHours ))
+
+		empDailyWage[$totalWorkingDays]="$(CalculateDailyWage $workHours)"
 	done
+
+	echo -e "Printing Days from the Daily Wage array"
+	echo ${!empDailyWage[@]}
+	echo "Printing the daily wages from array"
+	echo ${empDailyWage[@]}
+
+	echo "*********************************************"
 
 	totalSalary=$(( $totalWorkHours*$EMP_RATE_PER_HOUR ))
 	echo "Total Salary is $totalSalary"

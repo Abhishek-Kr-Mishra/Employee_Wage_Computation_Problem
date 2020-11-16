@@ -10,23 +10,30 @@ MAX_HOURS_IN_MONTH=1000
 totalWorkingDays=0
 totalWorkHours=0
 
+function GetTotalWorkHours()
+{
+                case $1 in
+                        1)
+                                workHour=8
+                                        ;;
+                        2)
+				workHour=4
+                                ;;
+                        *) workHour=0
+                esac
+
+                     echo "$workHour"
+
+}
+
+
 	while(( $totalWorkHours < $MAX_HOURS_IN_MONTH && $totalWorkingDays < $WORK_DAY_IN_A_MONTH ))
 	do
 		((totalWorkingDays++))
-		echo "Total Working Day : $totalWorkingDays"
-		attendanceValue=$(( RANDOM%3 ))
-		case $attendanceValue in
-			1) echo "Employee is Full Time"
-			 	workHour=8
-			     		;;
-			2) echo "Employee is Part Time"
-			 	workHour=4
-			     	;;
-			*) workHour=0
-		esac
-			totalWorkHours=$(( $totalWorkHours+$workHour ))
-			echo -e "Total Employee Hours: $totalWorkHours \n"
-		done
+		workHours="$( GetTotalWorkHours $(( RANDOM%3 )) )"
+		echo "$workHours"
+		totalWorkHours=$(( $totalWorkHours+$workHours ))
+	done
 
 	totalSalary=$(( $totalWorkHours*$EMP_RATE_PER_HOUR ))
-	echo "Total Salary is $totalSalary "
+	echo "Total Salary is $totalSalary"

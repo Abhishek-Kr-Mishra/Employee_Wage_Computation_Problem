@@ -17,19 +17,17 @@ totalSalary=0
 		1) echo "Employee is Full Time"
 			 workHour=8
 			HoursCondition=$(( $HoursCondition+8 ))
-			((DaysCondition++))
 			     ;;
 		2) echo "Employee is Part Time"
 			 workHour=4
 			HoursCondition=$(( $HoursCondition+4 ))
-			((DaysCondition++))
 			     ;;
 		*) workHour=0
 	esac
 
-	perDaySalary=$(( $EMP_RATE_PER_HOUR*$workHour ))
-	echo "Day : $day          Salary : $perDaySalary"
-	totalSalary=$(( $totalSalary+$perDaySalary ))
+		perDaySalary=$(( $EMP_RATE_PER_HOUR*$workHour ))
+		echo "Day : $day          Salary : $perDaySalary"
+		totalSalary=$(( $totalSalary+$perDaySalary ))
 	done
 
 	echo "Total Salary is $totalSalary"
